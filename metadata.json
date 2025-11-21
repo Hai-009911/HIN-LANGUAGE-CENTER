@@ -1,0 +1,9 @@
+{
+  "name": "Hin Language Center - test backend",
+  "description": "Một hệ thống quản lý toàn diện cho các trung tâm tiếng Anh, được thiết kế để xử lý các công việc của học viên, giáo viên và quản trị viên. Nó bao gồm các tính năng quản lý lớp học, theo dõi chuyên cần, xử lý bài tập và chấm điểm, được tùy chỉnh cho các vai trò Quản trị viên, Giáo viên và Học viên.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera",
+    "geolocation"
+  ]
+}

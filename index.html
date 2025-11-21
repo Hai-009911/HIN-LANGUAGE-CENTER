@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hin Language Center</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              colors: {
+                'hin-blue': {
+                    50: '#f0faff',
+                    100: '#e0f2fe',
+                    200: '#bae6fd',
+                    500: '#0ea5e9',
+                    600: '#0284c7',
+                    700: '#0369a1',
+                    800: '#075985',
+                    900: '#0D244F',
+                },
+                'hin-orange': {
+                    DEFAULT: '#FBBF24',
+                    '50': '#fffbeb',
+                    '100': '#fef3c7',
+                    '300': '#fcd34d',
+                    '400': '#fbbf24',
+                    '500': '#f59e0b',
+                    '800': '#92400e',
+                },
+                'hin-green': {
+                    DEFAULT: '#14B8A6',
+                    100: '#d1fae5',
+                    500: '#10b981',
+                    600: '#059669',
+                    700: '#047857',
+                    800: '#065f46',
+                },
+                'hin-beige': {
+                    50: '#fdfcfb',
+                    100: '#fbf8f5'
+                }
+              },
+            }
+          }
+        }
+    </script>
+    
+    <style>
+        /* Global styles required by components */
+        html { scroll-behavior: smooth; }
+
+        /* Ripple effect for Button.tsx */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-animation 600ms linear;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Shimmer effect for skeletons */
+        .shimmer-wrapper {
+            background: #f6f7f8;
+            background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+            background-repeat: no-repeat;
+            background-size: 800px 104px; 
+            animation: placeholderShimmer 1s linear infinite forwards;
+        }
+        .dark .shimmer-wrapper {
+             background: #1f2937; /* dark:bg-gray-800 */
+             background-image: linear-gradient(to right, #1f2937 0%, #374151 20%, #1f2937 40%, #1f2937 100%);
+        }
+        @keyframes placeholderShimmer {
+            0% { background-position: -468px 0; }
+            100% { background-position: 468px 0; }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        html.dark ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #a0bccd; border-radius: 4px; }
+        html.dark ::-webkit-scrollbar-thumb { background: #475569; }
+        ::-webkit-scrollbar-thumb:hover { background: #88a1b5; }
+        html.dark ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+
+        /* Auth/Landing page animations */
+        .auth-fade-in { animation: auth-fade-in-animation 0.5s ease-out forwards; }
+        @keyframes auth-fade-in-animation {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .blob-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(50px); opacity: 0.2; }
+        .blob1 { width: 400px; height: 400px; background-color: #FBBF24; top: -100px; left: -150px; animation: blob-move1 15s infinite alternate; }
+        .blob2 { width: 350px; height: 350px; background-color: #14B8A6; bottom: -150px; right: -150px; animation: blob-move2 12s infinite alternate; }
+        @keyframes blob-move1 { from { transform: translate(0, 0) scale(1); } to { transform: translate(50px, 30px) scale(1.2); } }
+        @keyframes blob-move2 { from { transform: translate(0, 0) scale(1); } to { transform: translate(-40px, -20px) scale(0.9); } }
+        .text-gradient { background: linear-gradient(to right, #0D244F, #14B8A6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hover-lift-glow { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift-glow:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); }
+        .dark .hover-lift-glow:hover { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+        .scroll-reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+        .accordion-item .icon { transition: transform 0.3s ease; }
+        .accordion-item[open] .icon { transform: rotate(45deg); }
+        .glass-card { background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); }
+        .dark .glass-card { background: rgba(13, 36, 79, 0.5); }
+
+        /* Dashboard layout animation */
+        @keyframes slide-in-right-anim { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .slide-in-right { animation: slide-in-right-anim 0.4s ease-out forwards; }
+        
+        /* Strength meter for signup */
+        .strength-meter-bar { transition: width 0.3s ease-in-out; }
+    </style>
+
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://cdn.jsdelivr.net/npm/react@19.2.0/+esm",
+    "react-dom/client": "https://cdn.jsdelivr.net/npm/react-dom@19.2.0/client/+esm",
+    "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@19.2.0/+esm",
+    "@google/genai": "https://cdn.jsdelivr.net/npm/@google/genai@1.27.0/+esm",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
+    "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js",
+    "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js",
+    "firebase/storage": "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.4.0/"
+  }
+}
+</script>
+<script>
+    // Handles theme switching for dark mode
+    (function() {
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        window.toggleTheme = function() {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+            // Dispatch a storage event to notify other tabs/windows
+            window.dispatchEvent(new Event('storage'));
+        }
+
+        // Apply theme on initial load
+        applyTheme(localStorage.getItem('theme'));
+
+        // Listen for changes from other tabs
+        window.addEventListener('storage', () => {
+             applyTheme(localStorage.getItem('theme'));
+        });
+    })();
+</script>
+</head>
+<body class="bg-hin-blue-50 dark:bg-hin-blue-900">
+    <div id="root"></div>
+    <script type="module" src="${VITE_PREVIEW_URL}/index.tsx"></script>
+</body>
+</html>
